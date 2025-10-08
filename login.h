@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include "home.h"
+#include <QLabel>
+#include <QLineEdit>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -18,12 +20,22 @@ public:
     Login(QWidget *parent = nullptr);
     ~Login();
 
+    protected:
+               bool eventFilter(QObject *obj, QEvent *event) override; // declare the event filter
 private slots:
-    void on_pushButton_login_clicked();
+               void handleLogin();
+
 
 private:
     Ui::Login *ui;
     Home *homepage;
+    // For responsive logo
+    QLabel *m_mainLogo;  // store QLabel pointer
+    QPixmap m_pixmap;    // store original pixmap
+
+    QLineEdit *m_usernameEdit;
+    QLineEdit *m_passwordEdit;
+
 
 };
 #endif // LOGIN_H

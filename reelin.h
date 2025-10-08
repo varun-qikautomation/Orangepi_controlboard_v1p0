@@ -15,6 +15,8 @@ public:
     explicit reelin(QWidget *parent = nullptr);
     ~reelin();
 
+public slots:         // 👈 use slots if you connect with signals
+    void backToHome();
 private:
     Ui::reelin *ui;
 };

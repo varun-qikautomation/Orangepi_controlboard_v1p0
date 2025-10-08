@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "reelin.h"
+#include "warning.h"
 
 namespace Ui {
 class Home;

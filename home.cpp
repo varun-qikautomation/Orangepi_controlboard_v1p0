@@ -86,6 +86,11 @@ Home::Home(QWidget *parent) :
                 dialog->setModal(true);
                 dialog->showMaximized();
                 this->hide();
+            }else if(title == "Warnings"){
+warning *dialog = new warning();
+                dialog->setModal(true);
+                dialog->showMaximized();
+                this->hide();
             }
         });
     }

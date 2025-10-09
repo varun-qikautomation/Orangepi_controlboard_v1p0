@@ -81,7 +81,7 @@ Login::Login(QWidget *parent)
     QPushButton *loginButton = new QPushButton("Login");
     loginButton->setFixedHeight(45);
     loginButton->setStyleSheet(
-        "background-color:#3498db; color:white; font-size:16px; border-radius:8px; border:none;"
+        "background-color:#1976d2; color:white; font-size:16px; border-radius:8px; border:none;"
         );
     loginLayout->addWidget(loginButton);
 
@@ -123,32 +123,32 @@ Login::~Login()
 
 void Login::handleLogin()
 {
-    // hide();
-    // homepage = new Home(this);
-    // homepage->showMaximized();
+    hide();
+    homepage = new Home(this);
+    homepage->showMaximized();
     // Example: get username and password
-    QString username = m_usernameEdit->text();
-    QString password = m_passwordEdit->text();
+//     QString username = m_usernameEdit->text();
+//     QString password = m_passwordEdit->text();
 
 
-    QSqlQuery query;
+//     QSqlQuery query;
 
-      query.prepare("SELECT * FROM users WHERE username = :username AND password = :password");
-    query.bindValue(":username",username);
-      query.bindValue(":password",password);
+//       query.prepare("SELECT * FROM users WHERE username = :username AND password = :password");
+//     query.bindValue(":username",username);
+//       query.bindValue(":password",password);
 
-    if(!query.exec()){
-          QMessageBox::critical(this,"Error","Database Error");
-return;    }
+//     if(!query.exec()){
+//           QMessageBox::critical(this,"Error","Database Error");
+// return;    }
 
-    if(query.next()){
-        QMessageBox::information(this,"Success","Login successfull");
-        hide();
-        homepage = new Home(this);
-        homepage->showMaximized();
+//     if(query.next()){
+//         QMessageBox::information(this,"Success","Login successfull");
+//         hide();
+//         homepage = new Home(this);
+//         homepage->showMaximized();
 
-    }else{
-        QMessageBox::warning(this,"Login Failed","Invalid username or password");
-    }
+//     }else{
+//         QMessageBox::warning(this,"Login Failed","Invalid username or password");
+//     }
 }
 

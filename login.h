@@ -25,7 +25,7 @@ private slots:
 private:
     Ui::Login *ui;
     Home *homepage;
-    warning *warningpage;
+
 
 };
 #endif // LOGIN_H

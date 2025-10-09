@@ -19,8 +19,8 @@ Login::~Login()
 void Login::on_pushButton_login_clicked()
 {
     hide();
-  warningpage = new warning(this);
-    warningpage->showMaximized();
+  homepage = new Home(this);
+    homepage->showMaximized();
 //     QString username = ui->lineEdit_username->text();
 //     QString password = ui->lineEdit_2_password->text();
 

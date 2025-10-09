@@ -106,6 +106,15 @@ void Home::setupHomePage()
         // Connect card click to switch page
         connect(card, &CardFrame::clicked, [this, title]() {
             if (title == "Reels In") {
+                reelin *dialog = new reelin();
+                dialog->setModal(true);
+                dialog->showMaximized();
+                this->hide();
+            }else if(title == "Warnings"){
+                warning *dialog = new warning();
+                dialog->setModal(true);
+                dialog->showMaximized();
+                this->hide();
                 stackedWidget->setCurrentWidget(reelsInPage);
             }
         });

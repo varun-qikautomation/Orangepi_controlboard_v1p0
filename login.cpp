@@ -124,7 +124,7 @@ Login::~Login()
 void Login::handleLogin()
 {
     hide();
-    homepage = new Home(this);
+  homepage = new Home(this);
     homepage->showMaximized();
     // Example: get username and password
 //     QString username = m_usernameEdit->text();
@@ -150,5 +150,5 @@ void Login::handleLogin()
 //     }else{
 //         QMessageBox::warning(this,"Login Failed","Invalid username or password");
 //     }
-}
+ }
 

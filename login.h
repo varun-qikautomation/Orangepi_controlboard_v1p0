@@ -6,6 +6,7 @@
 #include <QLabel>
 #include <QLineEdit>
 
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class Login;
@@ -35,6 +36,7 @@ private:
 
     QLineEdit *m_usernameEdit;
     QLineEdit *m_passwordEdit;
+
 
 
 };

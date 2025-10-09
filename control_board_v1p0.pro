@@ -14,7 +14,8 @@ SOURCES += \
     home.cpp \
     main.cpp \
     login.cpp \
-    reelin.cpp
+    reelin.cpp \
+    warning.cpp
 
 HEADERS += \
     DatabaseManager.h \
@@ -23,12 +24,14 @@ HEADERS += \
     flowlayout.h \
     home.h \
     login.h \
-    reelin.h
+    reelin.h \
+    warning.h
 
 FORMS += \
     home.ui \
     login.ui \
-    reelin.ui
+    reelin.ui \
+    warning.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

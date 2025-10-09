@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "reelin.h"
+#include "warning.h"
 #include <QStackedWidget>
 
 namespace Ui {

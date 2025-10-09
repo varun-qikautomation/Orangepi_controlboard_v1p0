@@ -41,9 +41,6 @@
          <item>
           <widget class="QWidget" name="ReelsIn" native="true"/>
          </item>
-         <item>
-          <widget class="QWidget" name="recentlyScannedReels" native="true"/>
-         </item>
         </layout>
        </item>
        <item>

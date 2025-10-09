@@ -4,6 +4,7 @@
 #include <QDialog>
 #include "reelin.h"
 #include "warning.h"
+#include <QStackedWidget>
 
 namespace Ui {
 class Home;
@@ -19,6 +20,13 @@ public:
 
 private:
     Ui::Home *ui;
+    QStackedWidget *stackedWidget;
+
+    QWidget *homePage;
+    QWidget *reelsInPage;
+
+    void setupPages();
+    void setupHomePage();
 };
 
 #endif // HOME_H

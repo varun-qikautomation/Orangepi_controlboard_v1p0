@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "home.h"
 
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class Login;
@@ -24,6 +25,7 @@ private slots:
 private:
     Ui::Login *ui;
     Home *homepage;
+    warning *warningpage;
 
 };
 #endif // LOGIN_H

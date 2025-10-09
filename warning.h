@@ -2,6 +2,8 @@
 #define WARNING_H
 
 #include <QDialog>
+#include <QList>
+#include <QStringList>
 
 namespace Ui {
 class warning;
@@ -17,6 +19,11 @@ public:
 
 private:
     Ui::warning *ui;
+      QList<QStringList> dataList; // now a class member
+    void setupWarningSection();
 };
 
 #endif // WARNING_H
+
+//-----------------ends-------------------
+

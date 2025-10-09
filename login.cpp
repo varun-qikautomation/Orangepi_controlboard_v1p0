@@ -19,8 +19,8 @@ Login::~Login()
 void Login::on_pushButton_login_clicked()
 {
     hide();
-    homepage = new Home(this);
-    homepage->showMaximized();
+  warningpage = new warning(this);
+    warningpage->showMaximized();
 //     QString username = ui->lineEdit_username->text();
 //     QString password = ui->lineEdit_2_password->text();
 
@@ -43,5 +43,5 @@ void Login::on_pushButton_login_clicked()
 //     }else{
 //         QMessageBox::warning(this,"Login Failed","Invalid username or password");
 //     }
-}
+ }
 

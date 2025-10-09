@@ -109,7 +109,7 @@ reelin::reelin(QWidget *parent)
     recentReelsLayout->setContentsMargins(15, 15, 15, 15);
 
     QLabel *recentLabel = new QLabel("Recently Scanned Reels");
-    recentLabel->setStyleSheet("font-weight: bold; font-size: 16px;");
+    recentLabel->setStyleSheet("font-weight: bold; font-size: 5px;");
     recentReelsLayout->addWidget(recentLabel);
 
     middleLayout->addWidget(recentReels, 1); // same stretch factor for equal width

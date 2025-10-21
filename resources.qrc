@@ -1,9 +1,6 @@
 <RCC>
     <qresource prefix="/logo">
-        <file>logoWNavbar.png</file>
-        <file>logoB.png</file>
-    </qresource>
-    <qresource prefix="/checkBox">
+        <file>logoA.png</file>
         <file>right.png</file>
     </qresource>
 </RCC>

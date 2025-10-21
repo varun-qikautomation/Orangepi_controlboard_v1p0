@@ -23,6 +23,8 @@ public slots:         // 👈 use slots if you connect with signals
 private:
     Ui::reelin *ui;
     QLineEdit *m_uniqueId;
+    QWidget *homePage;
+
 };
 
 #endif // REELIN_H

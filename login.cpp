@@ -38,7 +38,7 @@ Login::Login(QWidget *parent)
 
     m_mainLogo = new QLabel;
     m_mainLogo->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-    m_pixmap = QPixmap(":logo/logoB.png");
+    m_pixmap = QPixmap(":logo/logoA");
     m_mainLogo->setPixmap(m_pixmap.scaled(500,500,Qt::KeepAspectRatio,Qt::SmoothTransformation));
 
     logoLayout->addWidget(m_mainLogo);

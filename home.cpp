@@ -1,5 +1,15 @@
 #include "home.h"
 #include "ui_home.h"
+
+#include "reelin.h"
+#include "pickup.h"
+#include "warning.h"
+#include "storesin.h"
+#include "storesout.h"
+#include "partsin.h"
+#include "settings.h"
+
+
 #include <QFrame>
 #include <QLabel>
 #include <QVBoxLayout>
@@ -64,7 +74,7 @@ void Home::setupHomePage()
     navLayout->setSpacing(25);
 
     QLabel *logoLabel = new QLabel;
-    QPixmap logoPixmap(":/logo/logoWNavbar.png");
+    QPixmap logoPixmap(":/logo/logoA.png");
     logoLabel->setPixmap(logoPixmap.scaled(250,250,Qt::KeepAspectRatio,Qt::SmoothTransformation));
     navLayout->addWidget(logoLabel);
 
@@ -81,7 +91,7 @@ void Home::setupHomePage()
 
     FlowLayout *flowLayout = new FlowLayout(nullptr, 0, 30, 30);
 
-    QStringList cardTitles = {"Reels In", "Pick up", "Settings", "Warnings", "Stores Out", "Stores In"};
+    QStringList cardTitles = {"Reels In", "Pick up", "Settings", "Warnings", "Stores Out", "Stores In","Parts In"};
     for (const QString &title : cardTitles) {
         CardFrame *card = new CardFrame();
         card->setFixedSize(250, 200);
@@ -116,7 +126,44 @@ void Home::setupHomePage()
                 dialog->showMaximized();
                 this->hide();
                 stackedWidget->setCurrentWidget(reelsInPage);
+            }else if(title == "Pick up"){
+                pickup * dialog= new pickup();
+                dialog->setModal(true);
+                dialog->showMaximized();
+                this->hide();
+                stackedWidget->setCurrentWidget(pickupPage);
+            }else if(title == "Stores In"){
+                 StoresIn *dialog = new StoresIn();
+                 dialog->setWindowModality(Qt::ApplicationModal);
+                    dialog->showMaximized();
+                        this->hide();
+            }else if (title == "Stores Out") {
+                StoreOut *storesoutPage = new StoreOut(this);
+                stackedWidget->addWidget(storesoutPage);
+                stackedWidget->setCurrentWidget(storesoutPage);
+            }else if(title == "Parts In") {
+                PartsIn *partsinPage = new PartsIn(this);
+                stackedWidget->addWidget(partsinPage);
+                stackedWidget->setCurrentWidget(partsinPage);
+            }else if (title == "Settings") {
+                // Check if Settings page already exists in stackedWidget
+                bool exists = false;
+                for (int i = 0; i < stackedWidget->count(); ++i) {
+                    if (qobject_cast<Settings*>(stackedWidget->widget(i))) {
+                        stackedWidget->setCurrentIndex(i);
+                        exists = true;
+                        break;
+                    }
+                }
+
+                // If not found, create and add new one
+                if (!exists) {
+                    Settings *settingsPage = new Settings(this);
+                    stackedWidget->addWidget(settingsPage);
+                    stackedWidget->setCurrentWidget(settingsPage);
+                }
             }
+
         });
     }
 
@@ -128,3 +175,8 @@ Home::~Home()
 {
     delete ui;
 }
+
+
+
+
+

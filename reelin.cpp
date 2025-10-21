@@ -11,6 +11,7 @@
 #include <QHeaderView>
 #include <QSqlQuery>
 #include <QStandardItemModel>
+
 reelin::reelin(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::reelin)
@@ -27,7 +28,7 @@ reelin::reelin(QWidget *parent)
     navbarLayout->setContentsMargins(20, 0, 20, 0);
 
     QLabel *logo = new QLabel;
-    QPixmap logopixmap(":logo/logoWNavbar.png");
+    QPixmap logopixmap(":logo/logoA.png");
     logo->setPixmap(logopixmap.scaled(250, 250, Qt::KeepAspectRatio, Qt::SmoothTransformation));
     navbarLayout->addWidget(logo);
 
@@ -239,6 +240,7 @@ void reelin::backToHome()
     if (QStackedWidget *stack = qobject_cast<QStackedWidget*>(p)) {
         stack->setCurrentIndex(0);
     }
+
 }
 
 

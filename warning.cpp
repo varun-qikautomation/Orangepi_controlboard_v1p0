@@ -28,7 +28,7 @@ warning::warning(QWidget *parent)
     navLayout->setSpacing(25);
 
     QLabel *logoLabel = new QLabel;
-    QPixmap logoPixmap(":/logo/logoWNavbar.png");
+    QPixmap logoPixmap(":/logo/logoA.png");
     logoLabel->setPixmap(logoPixmap.scaled(250, 250, Qt::KeepAspectRatio, Qt::SmoothTransformation));
     navLayout->addWidget(logoLabel);
 

@@ -1,6 +1,14 @@
 #include "home.h"
 #include "ui_home.h"
 
+#include "reelin.h"
+#include "pickup.h"
+#include "warning.h"
+#include "storesout.h"
+#include "partsin.h"
+#include "settings.h"
+
+
 #include <QFrame>
 #include <QLabel>
 #include <QVBoxLayout>
@@ -10,15 +18,53 @@
 #include "cardframe.h"
 #include "flowlayout.h"
 #include <QDir>
+#include <QStackedWidget>
 
 Home::Home(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Home)
 {
     ui->setupUi(this);
+    // Create stacked widget
+    stackedWidget = new QStackedWidget(this);
+    stackedWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+    // Setup individual pages
+    setupPages();
+
+    // Add stacked widget to main layout
+    ui->mainLayout->addWidget(stackedWidget);
+
+}
+void Home::setupPages()
+{
+    // 1️⃣ Home page (cards)
+    homePage = new QWidget();
+    setupHomePage();
+    stackedWidget->addWidget(homePage);
+
+    // 2️⃣ Reel In page
+    reelsInPage = new reelin();   // your existing ReelIn widget
+    stackedWidget->addWidget(reelsInPage);
+
+    // ✅ Connect back signals to go to Home
+    connect((reelin*)reelsInPage, &reelin::backToHome, [this]() {
+        stackedWidget->setCurrentWidget(homePage);
+    });
+
+    // Show Home page initially
+    stackedWidget->setCurrentWidget(homePage);
+}
+
+void Home::setupHomePage()
+{
+    // ✅ Create layout for the home page itself
+    QVBoxLayout *homeLayout = new QVBoxLayout(homePage);
+    homeLayout->setContentsMargins(0, 0, 0, 0);
+    homeLayout->setSpacing(0);
 
     // Navbar
-    QWidget *navbar = new QWidget(this);
+    QWidget *navbar = new QWidget(homePage);
     navbar->setFixedHeight(70);
     navbar->setStyleSheet("background-color: #FFFFFF;");
 
@@ -26,47 +72,35 @@ Home::Home(QWidget *parent) :
     navLayout->setContentsMargins(20, 0, 20, 0);
     navLayout->setSpacing(25);
 
-    // Adding Logo
     QLabel *logoLabel = new QLabel;
-    QPixmap logoPixmap(":/logo/logoWNavbar.png");
+    QPixmap logoPixmap(":/logo/logoA.png");
     logoLabel->setPixmap(logoPixmap.scaled(250,250,Qt::KeepAspectRatio,Qt::SmoothTransformation));
     navLayout->addWidget(logoLabel);
 
-    // Insert navbar at top of layout
-    ui->mainLayout->insertWidget(0, navbar);
+    homeLayout->addWidget(navbar); //  add to home page layout
 
-    // No margin for main layout (navbar and content separate)
-    ui->mainLayout->setContentsMargins(0, 0, 0, 0);
-    ui->mainLayout->setSpacing(0);
-
-    // ============================
-    // 2️⃣ CARDS CONTAINER SECTION
-    // ============================
-    QWidget *cardsContainer = new QWidget(this);
+    // Cards container
+    QWidget *cardsContainer = new QWidget(homePage);
     cardsContainer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    cardsContainer->setStyleSheet("background-color: #ecf0f1;"); // light background
+    cardsContainer->setStyleSheet("background-color: #ecf0f1;");
 
-    // ✅ Give margin only to the cards container
     QVBoxLayout *cardsLayout = new QVBoxLayout(cardsContainer);
-    cardsLayout->setContentsMargins(100, 40, 80, 100);  // margin for all sides
+    cardsLayout->setContentsMargins(100, 40, 80, 100);
     cardsLayout->setSpacing(0);
 
-    // Flow layout for cards
-    FlowLayout *flowLayout = new FlowLayout(nullptr, 0, 30, 30); // 30px spacing between cards
+    FlowLayout *flowLayout = new FlowLayout(nullptr, 0, 30, 30);
 
-    QStringList cardTitles = {"Reels In", "Pick up", "Settings","Warnings","Stores Out","Stores In"};
+    QStringList cardTitles = {"Reels In", "Pick up", "Settings", "Warnings", "Stores Out","Parts In"};
     for (const QString &title : cardTitles) {
         CardFrame *card = new CardFrame();
         card->setFixedSize(250, 200);
 
-        // Shadow for nice look
         QGraphicsDropShadowEffect *shadow = new QGraphicsDropShadowEffect();
         shadow->setBlurRadius(15);
         shadow->setOffset(3, 3);
         shadow->setColor(QColor(0, 0, 0, 100));
         card->setGraphicsEffect(shadow);
 
-        // Card content
         QVBoxLayout *cardContent = new QVBoxLayout(card);
         QLabel *titleLabel = new QLabel(title);
         titleLabel->setAlignment(Qt::AlignCenter);
@@ -78,8 +112,7 @@ Home::Home(QWidget *parent) :
 
         flowLayout->addWidget(card);
 
-
-        // ✅ Connect click using lambda
+        // Connect card click to switch page
         connect(card, &CardFrame::clicked, [this, title]() {
             if (title == "Reels In") {
                 reelin *dialog = new reelin();
@@ -87,22 +120,57 @@ Home::Home(QWidget *parent) :
                 dialog->showMaximized();
                 this->hide();
             }else if(title == "Warnings"){
-warning *dialog = new warning();
+                warning *dialog = new warning();
                 dialog->setModal(true);
                 dialog->showMaximized();
                 this->hide();
+                stackedWidget->setCurrentWidget(reelsInPage);
+            }else if(title == "Pick up"){
+                pickup * dialog= new pickup();
+                dialog->setModal(true);
+                dialog->showMaximized();
+                this->hide();
+                stackedWidget->setCurrentWidget(pickupPage);
+            }else if (title == "Stores Out") {
+                StoreOut *storesoutPage = new StoreOut(this);
+                stackedWidget->addWidget(storesoutPage);
+                stackedWidget->setCurrentWidget(storesoutPage);
+            }else if(title == "Parts In") {
+                PartsIn *partsinPage = new PartsIn(this);
+                stackedWidget->addWidget(partsinPage);
+                stackedWidget->setCurrentWidget(partsinPage);
+            }else if (title == "Settings") {
+                // Check if Settings page already exists in stackedWidget
+                bool exists = false;
+                for (int i = 0; i < stackedWidget->count(); ++i) {
+                    if (qobject_cast<Settings*>(stackedWidget->widget(i))) {
+                        stackedWidget->setCurrentIndex(i);
+                        exists = true;
+                        break;
+                    }
+                }
+
+                // If not found, create and add new one
+                if (!exists) {
+                    Settings *settingsPage = new Settings(this);
+                    stackedWidget->addWidget(settingsPage);
+                    stackedWidget->setCurrentWidget(settingsPage);
+                }
             }
+
         });
     }
 
-    // Add the flow layout to the cards container
     cardsLayout->addLayout(flowLayout);
-
-    // Finally, add cards container below navbar
-    ui->mainLayout->addWidget(cardsContainer);
+    homeLayout->addWidget(cardsContainer); // ✅ add below navbar
 }
 
 Home::~Home()
 {
     delete ui;
 }
+
+
+
+
+

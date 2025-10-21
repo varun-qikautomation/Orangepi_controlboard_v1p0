@@ -4,6 +4,12 @@
 #include <QDialog>
 #include "reelin.h"
 #include "warning.h"
+#include "pickup.h"
+#include "storesout.h"
+#include "partsin.h"
+#include "settings.h"
+#include <QStackedWidget>
+
 
 namespace Ui {
 class Home;
@@ -17,8 +23,22 @@ public:
     explicit Home(QWidget *parent = nullptr);
     ~Home();
 
+
+
 private:
     Ui::Home *ui;
+    QStackedWidget *stackedWidget;
+
+    QWidget *homePage;
+    QWidget *reelsInPage;
+    QWidget *pickupPage;
+    QWidget *storesoutPage;
+    QWidget *partsinPage;
+    QWidget *settingsPage;
+
+
+    void setupPages();
+    void setupHomePage();
 };
 
 #endif // HOME_H

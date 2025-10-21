@@ -21,7 +21,6 @@ SOURCES += \
     qrcodetemplate.cpp \
     reelin.cpp \
     settings.cpp \
-    storesin.cpp \
     storesout.cpp \
     warning.cpp
 
@@ -39,7 +38,6 @@ HEADERS += \
     qrcodetemplate.h \
     reelin.h \
     settings.h \
-    storesin.h \
     storesout.h \
     warning.h
 
@@ -53,7 +51,6 @@ FORMS += \
     qrcodetemplate.ui \
     reelin.ui \
     settings.ui \
-    storesin.ui \
     storesout.ui \
     warning.ui
 

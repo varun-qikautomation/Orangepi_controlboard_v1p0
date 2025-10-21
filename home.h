@@ -5,7 +5,6 @@
 #include "reelin.h"
 #include "warning.h"
 #include "pickup.h"
-#include "storesin.h"
 #include "storesout.h"
 #include "partsin.h"
 #include "settings.h"
@@ -33,7 +32,6 @@ private:
     QWidget *homePage;
     QWidget *reelsInPage;
     QWidget *pickupPage;
-    QWidget *storesinPage;
     QWidget *storesoutPage;
     QWidget *partsinPage;
     QWidget *settingsPage;

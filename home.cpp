@@ -4,7 +4,6 @@
 #include "reelin.h"
 #include "pickup.h"
 #include "warning.h"
-#include "storesin.h"
 #include "storesout.h"
 #include "partsin.h"
 #include "settings.h"
@@ -91,7 +90,7 @@ void Home::setupHomePage()
 
     FlowLayout *flowLayout = new FlowLayout(nullptr, 0, 30, 30);
 
-    QStringList cardTitles = {"Reels In", "Pick up", "Settings", "Warnings", "Stores Out", "Stores In","Parts In"};
+    QStringList cardTitles = {"Reels In", "Pick up", "Settings", "Warnings", "Stores Out","Parts In"};
     for (const QString &title : cardTitles) {
         CardFrame *card = new CardFrame();
         card->setFixedSize(250, 200);
@@ -132,11 +131,6 @@ void Home::setupHomePage()
                 dialog->showMaximized();
                 this->hide();
                 stackedWidget->setCurrentWidget(pickupPage);
-            }else if(title == "Stores In"){
-                 StoresIn *dialog = new StoresIn();
-                 dialog->setWindowModality(Qt::ApplicationModal);
-                    dialog->showMaximized();
-                        this->hide();
             }else if (title == "Stores Out") {
                 StoreOut *storesoutPage = new StoreOut(this);
                 stackedWidget->addWidget(storesoutPage);
